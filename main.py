@@ -1,6 +1,5 @@
-# Backend-API der Developer Platform.
-# Verarbeitet Projekte, empfängt JSON-Daten und gibt API-Antworten zurück.
-
+# Backend API of the Developer Platform.
+# Handles projects, receives JSON data and returns API responses.
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -8,8 +7,8 @@ from pydantic import BaseModel
 app = FastAPI()
 
 
-# Temporärer Speicher für Projekte
-# Später wird dieser durch eine Datenbank ersetzt.
+## Temporary storage for projects.
+# Will be replaced by a database in the future.
 projects = [
     {
         "id": 1,
@@ -25,8 +24,7 @@ projects = [
     }
 ]
 
-
-# Startseite der API
+# API homepage
 @app.get("/")
 def home():
     return {
@@ -34,19 +32,20 @@ def home():
     }
 
 
-# Gibt alle Projekte zurück
+# Returns all projects
 @app.get("/projects")
 def get_projects():
     return projects
 
 
-# Struktur eines Projekts
+# Defines the structure of a project
 class Project(BaseModel):
     id: int
     name: str
     language: str
     status: str
 
+# Returns a single project by ID
 @app.get("/projects/{project_id}")
 def get_project(project_id: int):
 
@@ -58,7 +57,7 @@ def get_project(project_id: int):
         "message": "Projekt nicht gefunden"
     }
 
-# Erstellt ein neues Projekt
+# Creates a new project
 @app.post("/projects")
 def create_project(project: Project):
 
@@ -70,7 +69,7 @@ def create_project(project: Project):
     }
 
 
-  #Aktualisiert ein bestehendes Projekt
+# Updates an existing project
 @app.put("/projects/{project_id}")
 def update_project(project_id: int, updated_project: Project):
 
@@ -86,11 +85,11 @@ def update_project(project_id: int, updated_project: Project):
           "message": "Projekt nicht gefunden"
       }
 
-# Löscht ein Projekt anhand seiner ID
+# Deletes a project by its ID
 @app.delete("/projects/{project_id}")
 def delete_project(project_id: int):
 
-# Durchsucht die Projektliste nach dem passenden Projekt
+# Searches the project list for the matching project
  for project in projects:
      if project["id"] == project_id:       # Prüft, ob die ID mit der gesuchten ID übereinstimmt
          projects.remove(project)
@@ -101,8 +100,7 @@ def delete_project(project_id: int):
         }
        
        
-        # Falls kein Projekt mit der angegebenen ID gefunden wurde,
-        # gibt die API eine Fehlermeldung zurück. 
+# Returns an error if no matching project was found.
          return {
         "message": "Projekt nicht gefunden"
         }
