@@ -1,212 +1,112 @@
-# Developer Platform API 🚀
+# Developer Platform API
 
-## Projektübersicht
+A backend REST API for managing software projects.
 
-Die **Developer Platform API** ist ein Backend-Projekt, das mit **Python und FastAPI** entwickelt wurde.
+This project was created to gain practical experience in backend development, REST APIs, data validation, containerization, and modern software development workflows.
 
-Das Ziel des Projekts ist es, eine einfache Plattform zur Verwaltung von Entwicklerprojekten bereitzustellen. Die API kann Projektdaten empfangen, speichern, abrufen, aktualisieren und löschen.
+## Overview
 
-Das Projekt zeigt grundlegende Kenntnisse in der Backend-Entwicklung, REST-APIs und strukturierter Softwareentwicklung.
+The Developer Platform API provides a simple backend system for managing project information.
 
----
+The API allows users to create, read, update, and delete projects through REST endpoints.
 
-## Funktionen
+The current version uses temporary in-memory storage. A database integration is planned as a future improvement.
 
-Die API unterstützt folgende CRUD-Operationen:
+## Features
 
-| Funktion | Beschreibung                                    |
-| -------- | ----------------------------------------------- |
-| Create   | Neue Projekte über eine API-Anfrage erstellen   |
-| Read     | Projekte anzeigen und einzelne Projekte abrufen |
-| Update   | Bestehende Projekte bearbeiten                  |
-| Delete   | Projekte anhand ihrer ID löschen                |
+- REST API built with FastAPI
+- CRUD operations for project management:
+  - Create projects
+  - Read project data
+  - Update existing projects
+  - Delete projects
+- Automatic API documentation with Swagger UI
+- Data validation using Pydantic
+- Containerized application using Docker
+- Dependency management using requirements.txt
+- Version control using Git and GitHub
 
----
+## Technologies
 
-## Verwendete Technologien
+| Technology | Purpose |
+|---|---|
+| Python | Programming language |
+| FastAPI | Backend REST API framework |
+| Pydantic | Data validation and data models |
+| Uvicorn | Server for running the API |
+| Docker | Containerization and consistent environments |
+| Git/GitHub | Version control and project management |
 
-| Technologie  | Verwendung                                     |
-| ------------ | ---------------------------------------------- |
-| Python       | Programmiersprache                             |
-| FastAPI      | Framework für die Erstellung der REST API      |
-| Pydantic     | Validierung und Strukturierung von Daten       |
-| JSON         | Austausch von Daten zwischen Client und Server |
-| Git & GitHub | Versionskontrolle und Projektverwaltung        |
+## Project Structure
 
----
 
-## Projektstruktur
-
-```
 developer-platform/
 │
-├── main.py          # Backend API
-├── README.md        # Projektdokumentation
-├── .gitignore       # Ignorierte Dateien
-└── LICENSE          # Projektlizenz
-```
+├── main.py # FastAPI backend application
+├── requirements.txt # Python dependencies
+├── Dockerfile # Docker container configuration
+├── README.md # Project documentation
+├── LICENSE
+└── .gitignore
 
----
-
-## API Endpunkte
-
-### Startseite
-
-**GET /**
-
-Überprüft, ob die API aktiv ist.
-
-Antwort:
-
-```json
-{
-  "message": "Developer Platform API läuft"
-}
-```
-
----
-
-### Alle Projekte abrufen
-
-**GET /projects**
-
-Gibt eine Liste aller gespeicherten Projekte zurück.
-
-Beispiel:
-
-```json
-[
-    {
-        "id": 1,
-        "name": "DevHub",
-        "language": "Python",
-        "status": "Running"
-    }
-]
-```
-
----
-
-### Einzelnes Projekt abrufen
-
-**GET /projects/{project_id}**
-
-Sucht ein Projekt anhand seiner ID.
-
-Beispiel:
-
-```
-GET /projects/1
-```
-
----
-
-### Projekt erstellen
-
-**POST /projects**
-
-Erstellt ein neues Projekt.
-
-Beispiel JSON:
-
-```json
-{
-    "id": 3,
-    "name": "Website",
-    "language": "Python",
-    "status": "Running"
-}
-```
-
----
-
-### Projekt aktualisieren
-
-**PUT /projects/{project_id}**
-
-Aktualisiert ein bestehendes Projekt.
-
----
-
-### Projekt löschen
-
-**DELETE /projects/{project_id}**
-
-Entfernt ein Projekt anhand seiner ID.
-
----
 
 ## Installation
 
-Repository klonen:
+### Clone the repository
 
 ```bash
-git clone https://github.com/DEIN-NAME/developer-platform.git
-```
-
-In den Projektordner wechseln:
-
-```bash
-cd developer-platform
-```
-
-Benötigte Pakete installieren:
-
-```bash
-pip install fastapi uvicorn
-```
-
----
-
-## API starten
-
-Server starten:
-
-```bash
+git clone <repository-url>
+Install dependencies
+pip install -r requirements.txt
+Start the API
 uvicorn main:app --reload
-```
 
-Die API läuft danach unter:
+The API is available at:
 
-```
 http://127.0.0.1:8000
-```
 
-FastAPI Dokumentation:
+Interactive API documentation:
 
-```
 http://127.0.0.1:8000/docs
-```
+Run with Docker
+Build Docker image
+docker build -t developer-platform .
+Start container
+docker run -p 8000:8000 developer-platform
 
----
+The API will then be available at:
 
-## Aktueller Entwicklungsstand
+http://localhost:8000
+API Endpoints
+Method	Endpoint	Description
+GET	/	Check API status
+GET	/projects	Get all projects
+GET	/projects/{id}	Get a specific project
+POST	/projects	Create a new project
+PUT	/projects/{id}	Update a project
+DELETE	/projects/{id}	Delete a project
+Example Project Data
+{
+  "id": 1,
+  "name": "DevHub",
+  "language": "Python",
+  "status": "Running"
+}
+Future Improvements
+Add PostgreSQL database integration
+Add user authentication and authorization
+Improve API security
+Add automated testing
+Deploy the application to a cloud environment
+Learning Goals
 
-Dieses Projekt verwendet aktuell einen temporären Speicher im Arbeitsspeicher.
+This project was created to improve practical skills in:
 
-Die nächsten geplanten Erweiterungen:
+Backend development
+REST API design
+Python programming
+Docker containerization
+Software development workflows
+Author
 
-* Datenbank Integration (SQLite/PostgreSQL)
-* Docker Containerisierung
-* Benutzerverwaltung und Authentifizierung
-* Automatisierte Tests
-* Deployment in der Cloud
-* CI/CD Pipeline
-
----
-
-## Lernziele
-
-Mit diesem Projekt wurden folgende Bereiche praktisch umgesetzt:
-
-* Entwicklung einer REST API
-* Arbeiten mit Backend-Frameworks
-* Datenmodellierung mit Pydantic
-* Umgang mit Git und GitHub
-* Strukturierung und Dokumentation eines Softwareprojekts
-
----
-
-## Autor
-
-Erstellt als persönliches Lernprojekt im Bereich Backend- und Plattformentwicklung.
+Created as a personal learning project to develop practical experience in modern software development.
